@@ -1,3 +1,11 @@
+<!-- Stampa in ordine in console:
+
+l'elemento padre di ul.
+il secondo elemento figlio di ul.
+l'elemento fratello successivo del secondo li.
+l'elemento fratello precedente del secondo li.
+Il tutto utilizzando tutte e 4 le proprietà viste nel video. -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +16,18 @@
 </head>
 
 <body>
-
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        const ul = document.querySelector("ul");
+        console.log(ul.parentElement); // l'elemento padre di ul
+        console.log(ul.children[1]); // il secondo elemento figlio di ul
+        console.log(ul.children[1].nextElementSibling); // l'elemento fratello successivo del secondo li
+        console.log(ul.children[1].previousElementSibling); // l'elemento fratello precedente del secondo li
+    </script>
 </body>
 
 </html>
