@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+            gap: 16px;
+            margin-bottom: 16px
+        }
+
+        ;
+    </style>
+</head>
+
+<body>
+    <h1>Il form di <span class="title-name"></span></h1>
+    <div class="form">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="email" placeholder="email">
+
+        <label for="firstname">Name</label>
+        <input type="text" name="firstname" class="firstname" placeholder="firstname">
+
+        <label for="lastname">Surname</label>
+        <input type="text" name="lastname" class="lastname" placeholder="lastname">
+    </div>
+    <button class="btn">Salva</button>
+    <p class="printedform"></p>
+    <script>
+        //      Lo scopo di questo task è di salvare tutti i dati di un form nel local storage. -Fai in modo che nello span venga
+        // inserito il testo che si è inserito nell'input nome -Fai in modo che questi dati si salvino nel local storage -Controlla
+        // che al reload il nome nel titolo non scompaia 
+
+        const spanTitle = document.getElementsByClassName('title-name')[0];
+        const form = document.getElementsByClassName('form')[0];
+        const emailInput = document.getElementsByClassName('email')[0];
+        const firstNameInput = document.getElementsByClassName('firstname')[0];
+        const lastNameInput = document.getElementsByClassName('lastname')[0];
+        const btn = document.getElementsByClassName('btn')[0];
+
+
+        function spanName() {
+            const nameValue = firstNameInput.value;
+            spanTitle.textContent = nameValue;
+        }
+
+        function salvaFormData() {
+            let person = {
+                email: emailInput.value,
+                firstName: firstNameInput.value,
+                lastName: lastNameInput.value,
+            };
+            localStorage.setItem('formData', JSON.stringify(person));
+            alert('Dati salvati con successo!');
+        }
+
+        function caricoFormData() {
+            const datiSalvati = localStorage.getItem('formData');
+            if (datiSalvati) {
+                const formData = JSON.parse(datiSalvati)
+                emailInput.value = formData.email || "";
+                firstNameInput.value = formData.firstName || "";
+                lastNameInput.value = formData.lastName || "";
+                spanName();
+            }
+        }
+
+        firstNameInput.addEventListener('input', spanName);
+        btn.addEventListener('click', salvaFormData);
+        document.addEventListener('DOMContentLoaded', caricoFormData);
+
+    </script>
+</body>
+
+</html>
